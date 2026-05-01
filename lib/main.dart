@@ -1,44 +1,74 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(const MyApp());
+void main() => runApp(const RealStreamApp());
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class RealStreamApp extends StatelessWidget {
+  const RealStreamApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      title: 'RealStream Cinema',
       home: Scaffold(
-        appBar: AppBar(title: const Text('LDSW - Widgets Básicos')),
-        body: Container( // 1. CONTAINER (Configurado con color y alineación)
-          color: Colors.blueGrey[50],
-          child: Column( // 2. COLUMN (Organiza los elementos verticalmente)
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text( // 3. TEXT (Configurado con estilo de fuente)
-                'Mi Aplicación Flutter',
-                style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+        // Usamos un Stack para poder poner una imagen de fondo
+        body: Stack(
+          children: [
+            // 1. IMAGEN DE FONDO
+            // Usamos una imagen de red con temática de cine
+            Container(
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: NetworkImage('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=2070'),
+                  fit: BoxFit.cover, // Cubre toda la pantalla
+                ),
               ),
-              const SizedBox(height: 20),
-              const Row( // 4. ROW (Organiza elementos horizontalmente)
+            ),
+            // 2. CAPA OSCURA (Para legibilidad)
+            Container(
+              color: Colors.black.withOpacity(0.6),
+            ),
+            // 3. CONTENIDO PRINCIPAL
+            Center(
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.code, color: Colors.blue),
-                  Text(' Desarrollo Web UDG ', style: TextStyle(fontSize: 18)),
-                  Icon(Icons.mobile_friendly, color: Colors.green),
+                  // NOMBRE DE LA APLICACIÓN
+                  const Text(
+                    'REALSTREAM',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 40,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 4,
+                    ),
+                  ),
+                  const Text(
+                    'CINEMA',
+                    style: TextStyle(
+                      color: Colors.blueAccent,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                  const SizedBox(height: 50),
+                  // MENSAJE DE BIENVENIDA
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.white),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: const Text(
+                      'Bienvenido a tu catálogo de películas',
+                      style: TextStyle(color: Colors.white, fontSize: 16),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
                 ],
               ),
-              const SizedBox(height: 30),
-              Stack( // 5. STACK (Superpone widgets)
-                alignment: Alignment.center,
-                children: [
-                  Container(width: 200, height: 60, color: Colors.blue[200]),
-                  const Text('Texto sobre el Stack', style: TextStyle(color: Colors.black)),
-                ],
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
